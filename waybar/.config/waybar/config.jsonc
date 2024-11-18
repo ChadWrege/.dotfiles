@@ -1,0 +1,162 @@
+{
+    "layer": "top", "position": "top",
+
+    "modules-left": [
+        "custom/notification",
+        "clock", 
+        "custom/weather",
+        "disk",
+        "memory",
+        "cpu",
+        "temperature",
+        "hyprland/window" 
+    ],
+
+    "modules-center": ["hyprland/workspaces"],
+
+    "modules-right": [
+        "tray",
+        "custom/clipboard",
+        "idle_inhibitor",
+        "bluetooth",
+        "network"
+    ],
+
+    "reload_style_on_change":true,
+
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+        "notification": "<span foreground='red'><sup></sup></span>",
+        "none": "",
+        "dnd-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-none": "",
+        "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "inhibited-none": "",
+        "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-inhibited-none": ""
+        },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "6": "",
+            "active": "",
+            "default": "" 
+        },
+        "persistent-workspaces": {
+            "*": [ 2, 3, 4, 5, 6 ]
+        }
+    },
+
+    "idle_inhibitor":{
+        "format": "<span font='12'>{icon} </span>",
+        "format-icons": {
+            "activated":"󰈈",
+            "deactivated":"󰈉"
+        }
+    },
+
+    "custom/weather": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/weather.sh",
+        "interval": 10,
+        "on-click": "firefox https://wttr.in"
+    },
+
+    "custom/clipboard":{
+        "format":"",
+        "on-click": "cliphist list | wofi -dmenu | cliphist decode | wl-copy",
+        "interval":86400
+    },
+
+
+    "clock": {
+        "format": "{:%I:%M:%S %p}",
+        "interval":1,
+        "tooltip-format": "\n<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "calendar-weeks-pos": "right",
+        "today-format": "<span color='#7645AD'><b><u>{}</u></b></span>",
+        "format-calendar": "<span color='#aeaeae'><b>{}</b></span>",
+        "format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
+        "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>"
+    },
+
+    "bluetooth": {
+        "format-on": "",
+        "format-off": "",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂴",
+        "format-connected-battery": "{device_battery_percentage}% 󰂴",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "on-click": "wofi-bluetooth"
+    }, 
+
+    "network": {
+        "format-wifi": " ",
+        "format-ethernet":" ",
+        "format-disconnected": "",
+        "tooltip-format": "{ipaddr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
+        "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
+        "on-click": "networkmanager_dmenu"
+    },
+
+    "disk": {
+        "interval": 30,
+        "format": "  {percentage_used}%",
+        "path": "/"
+    },
+
+    "cpu": {
+        "interval": 1,
+        "format": " {usage}%",
+        "min-length": 6,
+        "max-length": 6,
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+    },
+
+    "memory": {
+        "format": " {percentage}%"
+    },
+
+    "hyprland/window": {
+        "format": "( {class} )",
+        "rewrite": {
+            "(.*) - Mozilla Firefox": "🌎 $1",
+            "(.*) - zsh": "> [$1]"
+        }
+    },
+
+    "temperature": {
+        "format": " {temperatureC}°C",            
+        "format-critical": " {temperatureC}°C",
+        "interval": 1,
+        "critical-threshold": 80,
+        "on-click": "foot btop"
+    },
+
+
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10
+    }
+}
+
