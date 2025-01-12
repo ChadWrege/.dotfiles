@@ -1,2 +1,0 @@
-# Generate a random password using urandom 
-sudo < /dev/urandom tr -dc A-Za-z0-9 | head -c14; echo
