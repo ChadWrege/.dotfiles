@@ -1,0 +1,13 @@
+[open]
+prepend_rules = [
+	{ mime = "video/*", use = "play" },
+]
+
+# append_rules = [
+# 	{ name = "*", use = "my-fallback" },
+# ]
+
+[opener]
+play = [
+	{ run = 'vlc "$@"', orphan = true },
+]
